@@ -964,3 +964,36 @@ root@Vaishnavi:~/devops# sudo nano /lib/systemd/system/jenkins.service
 root@Vaishnavi:~/devops# sudo systemctl daemon-reload
 root@Vaishnavi:~/devops# sudo systemctl restart jenkins
 root@Vaishnavi:~/devops#
+FROM ubuntu
+MAINTAINER vaishu
+
+# Update the apt-get package list and install NGINX
+RUN apt-get update -y && apt-get install -y nginx
+
+# Install additional utilities: vim, curl, tree, wget
+RUN apt-get install -y vim curl tree wget
+
+# Copy your local file to the container's NGINX directory (adjust path if necessary)
+COPY index.html /usr/share/nginx/html/index.html
+
+# Set environment variable for Java home (make sure Java is installed first)
+ENV JAVA_HOME=/usr/bin/java
+
+# Run the container as root (already default, can be omitted)
+USER root
+
+# Set working directory to NGINX's HTML directory
+WORKDIR /usr/share/nginx/html
+
+# Create a volume (make sure to use the correct path for your use case)
+VOLUME /myvol
+
+# Expose port 80 for NGINX
+EXPOSE 80
+
+# Start the NGINX service
+CMD ["service", "nginx", "start"]
+
+
+
+
