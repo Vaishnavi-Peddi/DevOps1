@@ -1,0 +1,966 @@
+Welcome to Ubuntu 24.04.1 LTS (GNU/Linux 5.15.167.4-microsoft-standard-WSL2 x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Fri Dec 27 13:33:45 UTC 2024
+
+  System load:  1.18               Processes:             38
+  Usage of /:   1.6% of 250.92GB   Users logged in:       0
+  Memory usage: 22%                IPv4 address for eth0: 172.30.221.151
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+This message is shown once a day. To disable it please create the
+/root/.hushlogin file.
+root@Vaishnavi:~# docker pull nginx
+Using default tag: latest
+latest: Pulling from library/nginx
+Digest: sha256:42e917aaa1b5bb40dd0f6f7f4f857490ac7747d7ef73b391c774a41a8b994f15
+Status: Image is up to date for nginx:latest
+docker.io/library/nginx:latest
+root@Vaishnavi:~# docker run -d -p 8088:80 nginx
+263e8af8943a7ec9c6ff9628517e9829687cd8d63c863b3ce425d561c50a8aab
+root@Vaishnavi:~# docker pull tomact
+Using default tag: latest
+Error response from daemon: pull access denied for tomact, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+root@Vaishnavi:~# docker pull tomcat
+Using default tag: latest
+latest: Pulling from library/tomcat
+de44b265507a: Pull complete
+4c2afd91a87d: Pull complete
+89e9bbcfa697: Pull complete
+11be3e613582: Pull complete
+1b9d1e181a2a: Pull complete
+a923f560618a: Pull complete
+4f4fb700ef54: Pull complete
+cb2453413e93: Pull complete
+Digest: sha256:935ff51abecc8dc793cb19c229ac7a988c8899e5fcba5e69ae96530fa76c4d56
+Status: Downloaded newer image for tomcat:latest
+docker.io/library/tomcat:latest
+root@Vaishnavi:~# docker run -d -p 8086:80 tomcat
+97e6ae3aad05e4b0213ab9451f55a074a37aff62d44101c7765cce5d00d8b1fd
+root@Vaishnavi:~# http://localhost:8086
+-bash: http://localhost:8086: No such file or directory
+root@Vaishnavi:~# http://localhost:8086docker ps
+-bash: http://localhost:8086docker: No such file or directory
+root@Vaishnavi:~# docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS              PORTS                                               NAMES
+97e6ae3aad05   tomcat    "catalina.sh run"        About a minute ago   Up About a minute   8080/tcp, 0.0.0.0:8086->80/tcp, [::]:8086->80/tcp   confident_jemison
+263e8af8943a   nginx     "/docker-entrypoint.…"   4 minutes ago        Up 4 minutes        0.0.0.0:8088->80/tcp, [::]:8088->80/tcp             jolly_williamson
+root@Vaishnavi:~# docker inspect <97e6ae3aad05e4b0213ab9451f55a074a37aff62d44101c7765cce5d00d8b1fd>
+-bash: syntax error near unexpected token `newline'
+root@Vaishnavi:~# docker inspect 97e6ae3aad05e4b0213ab9451f55a074a37aff62d44101c7765cce5d00d8b1fd
+[
+    {
+        "Id": "97e6ae3aad05e4b0213ab9451f55a074a37aff62d44101c7765cce5d00d8b1fd",
+        "Created": "2024-12-27T13:37:10.635049879Z",
+        "Path": "catalina.sh",
+        "Args": [
+            "run"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 1395,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2024-12-27T13:37:10.996235733Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:f62f518e5c5c117ed2b23e2868bcbb510edbc7e403246e74694c3e7e05213673",
+        "ResolvConfPath": "/var/lib/docker/containers/97e6ae3aad05e4b0213ab9451f55a074a37aff62d44101c7765cce5d00d8b1fd/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/97e6ae3aad05e4b0213ab9451f55a074a37aff62d44101c7765cce5d00d8b1fd/hostname",
+        "HostsPath": "/var/lib/docker/containers/97e6ae3aad05e4b0213ab9451f55a074a37aff62d44101c7765cce5d00d8b1fd/hosts",
+        "LogPath": "/var/lib/docker/containers/97e6ae3aad05e4b0213ab9451f55a074a37aff62d44101c7765cce5d00d8b1fd/97e6ae3aad05e4b0213ab9451f55a074a37aff62d44101c7765cce5d00d8b1fd-json.log",
+        "Name": "/confident_jemison",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "bridge",
+            "PortBindings": {
+                "80/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "8086"
+                    }
+                ]
+            },
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                38,
+                144
+            ],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "host",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": [],
+            "BlkioDeviceWriteBps": [],
+            "BlkioDeviceReadIOps": [],
+            "BlkioDeviceWriteIOps": [],
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": [],
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware",
+                "/sys/devices/virtual/powercap"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/d7476d8306c275d54883535caac44c8e77bfdec40e7954c7b45b1ec79a93cb51-init/diff:/var/lib/docker/overlay2/41743287b035c496aa8cc761104e128d0b9e0199bd7973c4935eb6d117b5ba8e/diff:/var/lib/docker/overlay2/3137c1e82fdcb4e9ff5e9cef55a59599217505e0ac275f629a7d35a666b7b4b8/diff:/var/lib/docker/overlay2/0ccafc53212c6f4396e7b6b3c72735791ac31246a7e763f84f6e48a84efa5181/diff:/var/lib/docker/overlay2/84396f24b3e413394cde9e155757409f24348f7d990ccfac4fa6c18d11f58388/diff:/var/lib/docker/overlay2/7af5ef6ae7e9d95bd560ccdf29c78167a6b6c26f8820e284379791da481a0555/diff:/var/lib/docker/overlay2/2c85892052faa1ea55245866547fe9debe4c4c07a540d77762ec72a027055104/diff:/var/lib/docker/overlay2/80b047945988bcf384f8c377828c37f17021c393d7f44c33efa4fe319f9677b2/diff:/var/lib/docker/overlay2/b0357dcd367a83c1948ee0b2c537dc258b7632b47b396282c5c94cdf916d9c10/diff:/var/lib/docker/overlay2/4ae75a0dd1ac57138714d771aaab70e197ebb4ff9b41aecb4584efbe74242ae1/diff",
+                "MergedDir": "/var/lib/docker/overlay2/d7476d8306c275d54883535caac44c8e77bfdec40e7954c7b45b1ec79a93cb51/merged",
+                "UpperDir": "/var/lib/docker/overlay2/d7476d8306c275d54883535caac44c8e77bfdec40e7954c7b45b1ec79a93cb51/diff",
+                "WorkDir": "/var/lib/docker/overlay2/d7476d8306c275d54883535caac44c8e77bfdec40e7954c7b45b1ec79a93cb51/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "97e6ae3aad05",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "80/tcp": {},
+                "8080/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/tomcat/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "JAVA_HOME=/opt/java/openjdk",
+                "LANG=en_US.UTF-8",
+                "LANGUAGE=en_US:en",
+                "LC_ALL=en_US.UTF-8",
+                "JAVA_VERSION=jdk-21.0.5+11",
+                "CATALINA_HOME=/usr/local/tomcat",
+                "TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib",
+                "LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib",
+                "GPG_KEYS=48F8E69F6390C9F25CFEDCD268248959359E722B A9C5DF4D22E99998D9875A5110C01C5A2F6059E7",
+                "TOMCAT_MAJOR=11",
+                "TOMCAT_VERSION=11.0.2",
+                "TOMCAT_SHA512=635d0b704d47a97050e3de995d372ef361ddb7589efbc53003afd6ac692d8db4a4125ae5dcc01af9e7371e8e598c98982e2a25617179b6ba0a04406299cca544"
+            ],
+            "Cmd": [
+                "catalina.sh",
+                "run"
+            ],
+            "Image": "tomcat",
+            "Volumes": null,
+            "WorkingDir": "/usr/local/tomcat",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {
+                "org.opencontainers.image.ref.name": "ubuntu",
+                "org.opencontainers.image.version": "24.04"
+            }
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "960a5b11b7efcc235064e18727f3da72446a6dcbacbc15b0cefe0a70ebfb568b",
+            "SandboxKey": "/var/run/docker/netns/960a5b11b7ef",
+            "Ports": {
+                "80/tcp": [
+                    {
+                        "HostIp": "0.0.0.0",
+                        "HostPort": "8086"
+                    },
+                    {
+                        "HostIp": "::",
+                        "HostPort": "8086"
+                    }
+                ],
+                "8080/tcp": null
+            },
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "05cc16533b105312c453ea3fc0462fe42999212a1ff634b6042248e0fa793e95",
+            "Gateway": "172.17.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.17.0.3",
+            "IPPrefixLen": 16,
+            "IPv6Gateway": "",
+            "MacAddress": "02:42:ac:11:00:03",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "MacAddress": "02:42:ac:11:00:03",
+                    "DriverOpts": null,
+                    "NetworkID": "2cd54bcd5336e2086e3433c584870740f6ba848e160c661b40350df6de080d34",
+                    "EndpointID": "05cc16533b105312c453ea3fc0462fe42999212a1ff634b6042248e0fa793e95",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.3",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        }
+    }
+]
+root@Vaishnavi:~# docker logs 97e6ae3aad05e4b0213ab9451f55a074a37aff62d44101c7765cce5d00d8b1fd
+27-Dec-2024 13:37:12.458 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/11.0.2
+27-Dec-2024 13:37:12.468 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Dec 5 2024 15:19:37 UTC
+27-Dec-2024 13:37:12.468 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 11.0.2.0
+27-Dec-2024 13:37:12.469 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+27-Dec-2024 13:37:12.469 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            5.15.167.4-microsoft-standard-WSL2
+27-Dec-2024 13:37:12.469 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+27-Dec-2024 13:37:12.470 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /opt/java/openjdk
+27-Dec-2024 13:37:12.470 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           21.0.5+11-LTS
+27-Dec-2024 13:37:12.471 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Eclipse Adoptium
+27-Dec-2024 13:37:12.471 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /usr/local/tomcat
+27-Dec-2024 13:37:12.471 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /usr/local/tomcat
+27-Dec-2024 13:37:12.491 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/usr/local/tomcat/conf/logging.properties
+27-Dec-2024 13:37:12.491 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+27-Dec-2024 13:37:12.492 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+27-Dec-2024 13:37:12.492 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+27-Dec-2024 13:37:12.492 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+27-Dec-2024 13:37:12.493 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+27-Dec-2024 13:37:12.493 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+27-Dec-2024 13:37:12.494 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+27-Dec-2024 13:37:12.494 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+27-Dec-2024 13:37:12.494 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --enable-native-access=ALL-UNNAMED
+27-Dec-2024 13:37:12.495 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/usr/local/tomcat
+27-Dec-2024 13:37:12.495 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/usr/local/tomcat
+27-Dec-2024 13:37:12.496 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/usr/local/tomcat/temp
+27-Dec-2024 13:37:12.500 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Loaded Apache Tomcat Native library [2.0.8] using APR version [1.7.2].
+27-Dec-2024 13:37:12.506 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL successfully initialized [OpenSSL 3.0.13 30 Jan 2024]
+27-Dec-2024 13:37:13.075 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+27-Dec-2024 13:37:13.116 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [1115] milliseconds
+27-Dec-2024 13:37:13.195 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+27-Dec-2024 13:37:13.196 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/11.0.2]
+27-Dec-2024 13:37:13.218 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+27-Dec-2024 13:37:13.249 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [130] milliseconds
+root@Vaishnavi:~# docker run -d -p 8086:8080 tomcat
+a92d65c3da009dc8aa46fdd8acf85aa9860424df279402fc125c1f012da5f4b1
+docker: Error response from daemon: driver failed programming external connectivity on endpoint boring_cerf (0f682d570ea670069ffe44c02dd015875ed79f710566cb9b741c7cf415fde9f2): Bind for 0.0.0.0:8086 failed: port is already allocated.
+root@Vaishnavi:~# docker run -d -p 8084:8080 tomcat
+27bb54d15d415789002e1e7efc578b235fb6a1f09c70d069260cf1a0e77da589
+root@Vaishnavi:~# docker run -d -p 8082:8080 tomcat:8.0
+Unable to find image 'tomcat:8.0' locally
+8.0: Pulling from library/tomcat
+f189db1b88b3: Pull complete
+3d06cf2f1b5e: Pull complete
+edd0da9e3091: Pull complete
+eb7768aae14e: Pull complete
+e2780f585e0f: Pull complete
+e5ed720afeba: Pull complete
+d9e134700cfc: Pull complete
+e4804b33d02a: Pull complete
+b9df0c24315e: Pull complete
+49fdae8eaa20: Pull complete
+1aea3d9a32e6: Pull complete
+Digest: sha256:8ecb10948deb32c34aeadf7bf95d12a93fbd3527911fa629c1a3e7823b89ce6f
+Status: Downloaded newer image for tomcat:8.0
+3414257d4a31d3b8c3021e9df497c6bcea5cb64948d9d8ba16cb3dfbc8862df2
+root@Vaishnavi:~# docker run -d -p 8082:8080 tomcat:8.0
+2822ec8e38848aa5165a519627953efe0becd9303d827841d1ae54c76ede28f4
+docker: Error response from daemon: driver failed programming external connectivity on endpoint cranky_allen (a7b23df39ecd77cd9e923e537cfba0420126289e4eb768b3851352855a0b7705): Bind for 0.0.0.0:8082 failed: port is already allocated.
+root@Vaishnavi:~# nano Dockerfile
+root@Vaishnavi:~# mkdir devops
+root@Vaishnavi:~# cd devops
+root@Vaishnavi:~/devops# nano Dockerfile
+root@Vaishnavi:~/devops# nano index.html
+root@Vaishnavi:~/devops# docker build -t ubuntu .
+failed to fetch metadata: fork/exec /usr/local/lib/docker/cli-plugins/docker-buildx: no such file or directory
+
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  3.584kB
+Step 1/11 : FROM ubuntu
+latest: Pulling from library/ubuntu
+de44b265507a: Already exists
+Digest: sha256:80dd3c3b9c6cecb9f1667e9290b3bc61b78c2678c02cbdae5f0fea92cc6734ab
+Status: Downloaded newer image for ubuntu:latest
+ ---> b1d9df8ab815
+Step 2/11 : MAINTAINER vaishu
+ ---> Running in 70a1bbd35915
+ ---> Removed intermediate container 70a1bbd35915
+ ---> 3c45b25b4ad3
+Step 3/11 : RUN apt-get update -y && apt-get install -y nginx
+ ---> Running in 93bb708f7849
+Get:1 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+Get:2 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages [1808 kB]
+Get:6 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [719 kB]
+Get:7 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+Get:8 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages [19.3 MB]
+Get:9 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [15.3 kB]
+Get:10 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1028 kB]
+Get:11 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [707 kB]
+Get:12 http://archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [331 kB]
+Get:13 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1254 kB]
+Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [968 kB]
+Get:15 http://archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [19.7 kB]
+Get:16 http://archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [724 kB]
+Get:17 http://archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [11.9 kB]
+Fetched 27.7 MB in 10s (2729 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  iproute2 krb5-locales libatm1t64 libbpf1 libcap2-bin libelf1t64
+  libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libmnl0
+  libpam-cap libtirpc-common libtirpc3t64 libxtables12 nginx-common
+Suggested packages:
+  iproute2-doc python3:any krb5-doc krb5-user fcgiwrap nginx-doc ssl-cert
+The following NEW packages will be installed:
+  iproute2 krb5-locales libatm1t64 libbpf1 libcap2-bin libelf1t64
+  libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libmnl0
+  libpam-cap libtirpc-common libtirpc3t64 libxtables12 nginx nginx-common
+0 upgraded, 18 newly installed, 0 to remove and 0 not upgraded.
+Need to get 2734 kB of archives.
+After this operation, 8057 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu noble/main amd64 libelf1t64 amd64 0.190-1.1build4 [57.6 kB]
+Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 libbpf1 amd64 1:1.3.0-2build2 [166 kB]
+Get:3 http://archive.ubuntu.com/ubuntu noble/main amd64 libmnl0 amd64 1.0.5-2build1 [12.3 kB]
+Get:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libkrb5support0 amd64 1.20.1-6ubuntu2.2 [33.7 kB]
+Get:5 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libk5crypto3 amd64 1.20.1-6ubuntu2.2 [81.8 kB]
+Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 libkeyutils1 amd64 1.6.3-3build1 [9490 B]
+Get:7 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libkrb5-3 amd64 1.20.1-6ubuntu2.2 [347 kB]
+Get:8 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libgssapi-krb5-2 amd64 1.20.1-6ubuntu2.2 [143 kB]
+Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 libtirpc-common all 1.3.4+ds-1.1build1 [8094 B]
+Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 libtirpc3t64 amd64 1.3.4+ds-1.1build1 [82.6 kB]
+Get:11 http://archive.ubuntu.com/ubuntu noble/main amd64 libxtables12 amd64 1.8.10-3ubuntu2 [35.7 kB]
+Get:12 http://archive.ubuntu.com/ubuntu noble/main amd64 libcap2-bin amd64 1:2.66-5ubuntu2 [34.5 kB]
+Get:13 http://archive.ubuntu.com/ubuntu noble/main amd64 iproute2 amd64 6.1.0-1ubuntu6 [1120 kB]
+Get:14 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 krb5-locales all 1.20.1-6ubuntu2.2 [14.0 kB]
+Get:15 http://archive.ubuntu.com/ubuntu noble/main amd64 libatm1t64 amd64 1:2.5.1-5.1build1 [22.9 kB]
+Get:16 http://archive.ubuntu.com/ubuntu noble/main amd64 libpam-cap amd64 1:2.66-5ubuntu2 [12.4 kB]
+Get:17 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 nginx-common all 1.24.0-2ubuntu7.1 [31.2 kB]
+Get:18 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 nginx amd64 1.24.0-2ubuntu7.1 [521 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 2734 kB in 4s (747 kB/s)
+Selecting previously unselected package libelf1t64:amd64.
+(Reading database ... 4379 files and directories currently installed.)
+Preparing to unpack .../00-libelf1t64_0.190-1.1build4_amd64.deb ...
+Unpacking libelf1t64:amd64 (0.190-1.1build4) ...
+Selecting previously unselected package libbpf1:amd64.
+Preparing to unpack .../01-libbpf1_1%3a1.3.0-2build2_amd64.deb ...
+Unpacking libbpf1:amd64 (1:1.3.0-2build2) ...
+Selecting previously unselected package libmnl0:amd64.
+Preparing to unpack .../02-libmnl0_1.0.5-2build1_amd64.deb ...
+Unpacking libmnl0:amd64 (1.0.5-2build1) ...
+Selecting previously unselected package libkrb5support0:amd64.
+Preparing to unpack .../03-libkrb5support0_1.20.1-6ubuntu2.2_amd64.deb ...
+Unpacking libkrb5support0:amd64 (1.20.1-6ubuntu2.2) ...
+Selecting previously unselected package libk5crypto3:amd64.
+Preparing to unpack .../04-libk5crypto3_1.20.1-6ubuntu2.2_amd64.deb ...
+Unpacking libk5crypto3:amd64 (1.20.1-6ubuntu2.2) ...
+Selecting previously unselected package libkeyutils1:amd64.
+Preparing to unpack .../05-libkeyutils1_1.6.3-3build1_amd64.deb ...
+Unpacking libkeyutils1:amd64 (1.6.3-3build1) ...
+Selecting previously unselected package libkrb5-3:amd64.
+Preparing to unpack .../06-libkrb5-3_1.20.1-6ubuntu2.2_amd64.deb ...
+Unpacking libkrb5-3:amd64 (1.20.1-6ubuntu2.2) ...
+Selecting previously unselected package libgssapi-krb5-2:amd64.
+Preparing to unpack .../07-libgssapi-krb5-2_1.20.1-6ubuntu2.2_amd64.deb ...
+Unpacking libgssapi-krb5-2:amd64 (1.20.1-6ubuntu2.2) ...
+Selecting previously unselected package libtirpc-common.
+Preparing to unpack .../08-libtirpc-common_1.3.4+ds-1.1build1_all.deb ...
+Unpacking libtirpc-common (1.3.4+ds-1.1build1) ...
+Selecting previously unselected package libtirpc3t64:amd64.
+Preparing to unpack .../09-libtirpc3t64_1.3.4+ds-1.1build1_amd64.deb ...
+Adding 'diversion of /lib/x86_64-linux-gnu/libtirpc.so.3 to /lib/x86_64-linux-gnu/libtirpc.so.3.usr-is-merged by libtirpc3t64'
+Adding 'diversion of /lib/x86_64-linux-gnu/libtirpc.so.3.0.0 to /lib/x86_64-linux-gnu/libtirpc.so.3.0.0.usr-is-merged by libtirpc3t64'
+Unpacking libtirpc3t64:amd64 (1.3.4+ds-1.1build1) ...
+Selecting previously unselected package libxtables12:amd64.
+Preparing to unpack .../10-libxtables12_1.8.10-3ubuntu2_amd64.deb ...
+Unpacking libxtables12:amd64 (1.8.10-3ubuntu2) ...
+Selecting previously unselected package libcap2-bin.
+Preparing to unpack .../11-libcap2-bin_1%3a2.66-5ubuntu2_amd64.deb ...
+Unpacking libcap2-bin (1:2.66-5ubuntu2) ...
+Selecting previously unselected package iproute2.
+Preparing to unpack .../12-iproute2_6.1.0-1ubuntu6_amd64.deb ...
+Unpacking iproute2 (6.1.0-1ubuntu6) ...
+Selecting previously unselected package krb5-locales.
+Preparing to unpack .../13-krb5-locales_1.20.1-6ubuntu2.2_all.deb ...
+Unpacking krb5-locales (1.20.1-6ubuntu2.2) ...
+Selecting previously unselected package libatm1t64:amd64.
+Preparing to unpack .../14-libatm1t64_1%3a2.5.1-5.1build1_amd64.deb ...
+Unpacking libatm1t64:amd64 (1:2.5.1-5.1build1) ...
+Selecting previously unselected package libpam-cap:amd64.
+Preparing to unpack .../15-libpam-cap_1%3a2.66-5ubuntu2_amd64.deb ...
+Unpacking libpam-cap:amd64 (1:2.66-5ubuntu2) ...
+Selecting previously unselected package nginx-common.
+Preparing to unpack .../16-nginx-common_1.24.0-2ubuntu7.1_all.deb ...
+Unpacking nginx-common (1.24.0-2ubuntu7.1) ...
+Selecting previously unselected package nginx.
+Preparing to unpack .../17-nginx_1.24.0-2ubuntu7.1_amd64.deb ...
+Unpacking nginx (1.24.0-2ubuntu7.1) ...
+Setting up libkeyutils1:amd64 (1.6.3-3build1) ...
+Setting up libatm1t64:amd64 (1:2.5.1-5.1build1) ...
+Setting up libtirpc-common (1.3.4+ds-1.1build1) ...
+Setting up krb5-locales (1.20.1-6ubuntu2.2) ...
+Setting up libelf1t64:amd64 (0.190-1.1build4) ...
+Setting up libkrb5support0:amd64 (1.20.1-6ubuntu2.2) ...
+Setting up libcap2-bin (1:2.66-5ubuntu2) ...
+Setting up libmnl0:amd64 (1.0.5-2build1) ...
+Setting up libk5crypto3:amd64 (1.20.1-6ubuntu2.2) ...
+Setting up libxtables12:amd64 (1.8.10-3ubuntu2) ...
+Setting up libkrb5-3:amd64 (1.20.1-6ubuntu2.2) ...
+Setting up libpam-cap:amd64 (1:2.66-5ubuntu2) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.38.2 /usr/local/share/perl/5.38.2 /usr/lib/x86_64-linux-gnu/perl5/5.38 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.38 /usr/share/perl/5.38 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 8.)
+debconf: falling back to frontend: Teletype
+Setting up libbpf1:amd64 (1:1.3.0-2build2) ...
+Setting up libgssapi-krb5-2:amd64 (1.20.1-6ubuntu2.2) ...
+Setting up libtirpc3t64:amd64 (1.3.4+ds-1.1build1) ...
+Setting up iproute2 (6.1.0-1ubuntu6) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.38.2 /usr/local/share/perl/5.38.2 /usr/lib/x86_64-linux-gnu/perl5/5.38 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.38 /usr/share/perl/5.38 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 8.)
+debconf: falling back to frontend: Teletype
+Setting up nginx (1.24.0-2ubuntu7.1) ...
+invoke-rc.d: unknown initscript, /etc/init.d/nginx not found.
+invoke-rc.d: could not determine current runlevel
+Setting up nginx-common (1.24.0-2ubuntu7.1) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.38.2 /usr/local/share/perl/5.38.2 /usr/lib/x86_64-linux-gnu/perl5/5.38 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.38 /usr/share/perl/5.38 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 8.)
+debconf: falling back to frontend: Teletype
+Processing triggers for libc-bin (2.39-0ubuntu8.3) ...
+ ---> Removed intermediate container 93bb708f7849
+ ---> f7902320b25b
+Step 4/11 : RUN apt-get install -y vim curl tree wget
+ ---> Running in 5f6a02964b2f
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  ca-certificates libbrotli1 libcurl4t64 libexpat1 libgpm2 libldap-common
+  libldap2 libnghttp2-14 libpsl5t64 libpython3.12-minimal libpython3.12-stdlib
+  libpython3.12t64 libreadline8t64 librtmp1 libsasl2-2 libsasl2-modules
+  libsasl2-modules-db libsodium23 libsqlite3-0 libssh-4 media-types netbase
+  openssl publicsuffix readline-common tzdata vim-common vim-runtime xxd
+Suggested packages:
+  gpm libsasl2-modules-gssapi-mit | libsasl2-modules-gssapi-heimdal
+  libsasl2-modules-ldap libsasl2-modules-otp libsasl2-modules-sql readline-doc
+  ctags vim-doc vim-scripts
+The following NEW packages will be installed:
+  ca-certificates curl libbrotli1 libcurl4t64 libexpat1 libgpm2 libldap-common
+  libldap2 libnghttp2-14 libpsl5t64 libpython3.12-minimal libpython3.12-stdlib
+  libpython3.12t64 libreadline8t64 librtmp1 libsasl2-2 libsasl2-modules
+  libsasl2-modules-db libsodium23 libsqlite3-0 libssh-4 media-types netbase
+  openssl publicsuffix readline-common tree tzdata vim vim-common vim-runtime
+  wget xxd
+0 upgraded, 33 newly installed, 0 to remove and 0 not upgraded.
+Need to get 19.6 MB of archives.
+After this operation, 80.3 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 openssl amd64 3.0.13-0ubuntu3.4 [1003 kB]
+Get:2 http://archive.ubuntu.com/ubuntu noble/main amd64 ca-certificates all 20240203 [159 kB]
+Get:3 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libexpat1 amd64 2.6.1-2ubuntu0.2 [87.4 kB]
+Get:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12-minimal amd64 3.12.3-1ubuntu0.3 [834 kB]
+Get:5 http://archive.ubuntu.com/ubuntu noble/main amd64 media-types all 10.1.0 [27.5 kB]
+Get:6 http://archive.ubuntu.com/ubuntu noble/main amd64 netbase all 6.4 [13.1 kB]
+Get:7 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 tzdata all 2024a-3ubuntu1.1 [273 kB]
+Get:8 http://archive.ubuntu.com/ubuntu noble/main amd64 readline-common all 8.2-4build1 [56.5 kB]
+Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 libreadline8t64 amd64 8.2-4build1 [153 kB]
+Get:10 http://archive.ubuntu.com/ubuntu noble/main amd64 libsqlite3-0 amd64 3.45.1-1ubuntu2 [701 kB]
+Get:11 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12-stdlib amd64 3.12.3-1ubuntu0.3 [2068 kB]
+Get:12 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 vim-common all 2:9.1.0016-1ubuntu7.5 [385 kB]
+Get:13 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 xxd amd64 2:9.1.0016-1ubuntu7.5 [63.3 kB]
+Get:14 http://archive.ubuntu.com/ubuntu noble/main amd64 libgpm2 amd64 1.20.7-11 [14.1 kB]
+Get:15 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libnghttp2-14 amd64 1.59.0-1ubuntu0.1 [74.3 kB]
+Get:16 http://archive.ubuntu.com/ubuntu noble/main amd64 libpsl5t64 amd64 0.21.2-1.1build1 [57.1 kB]
+Get:17 http://archive.ubuntu.com/ubuntu noble/main amd64 publicsuffix all 20231001.0357-0.1 [129 kB]
+Get:18 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 wget amd64 1.21.4-1ubuntu4.1 [334 kB]
+Get:19 http://archive.ubuntu.com/ubuntu noble/main amd64 libbrotli1 amd64 1.1.0-2build2 [331 kB]
+Get:20 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsasl2-modules-db amd64 2.1.28+dfsg1-5ubuntu3.1 [20.4 kB]
+Get:21 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsasl2-2 amd64 2.1.28+dfsg1-5ubuntu3.1 [53.2 kB]
+Get:22 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libldap2 amd64 2.6.7+dfsg-1~exp1ubuntu8.1 [195 kB]
+Get:23 http://archive.ubuntu.com/ubuntu noble/main amd64 librtmp1 amd64 2.4+20151223.gitfa8646d.1-2build7 [56.3 kB]
+Get:24 http://archive.ubuntu.com/ubuntu noble/main amd64 libssh-4 amd64 0.10.6-2build2 [188 kB]
+Get:25 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libcurl4t64 amd64 8.5.0-2ubuntu10.6 [341 kB]
+Get:26 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 curl amd64 8.5.0-2ubuntu10.6 [226 kB]
+Get:27 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libldap-common all 2.6.7+dfsg-1~exp1ubuntu8.1 [31.5 kB]
+Get:28 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libpython3.12t64 amd64 3.12.3-1ubuntu0.3 [2333 kB]
+Get:29 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libsasl2-modules amd64 2.1.28+dfsg1-5ubuntu3.1 [69.9 kB]
+Get:30 http://archive.ubuntu.com/ubuntu noble/main amd64 libsodium23 amd64 1.0.18-1build3 [161 kB]
+Get:31 http://archive.ubuntu.com/ubuntu noble/universe amd64 tree amd64 2.1.1-2ubuntu3 [47.1 kB]
+Get:32 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 vim-runtime all 2:9.1.0016-1ubuntu7.5 [7279 kB]
+Get:33 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 vim amd64 2:9.1.0016-1ubuntu7.5 [1881 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 19.6 MB in 42s (466 kB/s)
+Selecting previously unselected package openssl.
+(Reading database ... 4725 files and directories currently installed.)
+Preparing to unpack .../00-openssl_3.0.13-0ubuntu3.4_amd64.deb ...
+Unpacking openssl (3.0.13-0ubuntu3.4) ...
+Selecting previously unselected package ca-certificates.
+Preparing to unpack .../01-ca-certificates_20240203_all.deb ...
+Unpacking ca-certificates (20240203) ...
+Selecting previously unselected package libexpat1:amd64.
+Preparing to unpack .../02-libexpat1_2.6.1-2ubuntu0.2_amd64.deb ...
+Unpacking libexpat1:amd64 (2.6.1-2ubuntu0.2) ...
+Selecting previously unselected package libpython3.12-minimal:amd64.
+Preparing to unpack .../03-libpython3.12-minimal_3.12.3-1ubuntu0.3_amd64.deb ...
+Unpacking libpython3.12-minimal:amd64 (3.12.3-1ubuntu0.3) ...
+Selecting previously unselected package media-types.
+Preparing to unpack .../04-media-types_10.1.0_all.deb ...
+Unpacking media-types (10.1.0) ...
+Selecting previously unselected package netbase.
+Preparing to unpack .../05-netbase_6.4_all.deb ...
+Unpacking netbase (6.4) ...
+Selecting previously unselected package tzdata.
+Preparing to unpack .../06-tzdata_2024a-3ubuntu1.1_all.deb ...
+Unpacking tzdata (2024a-3ubuntu1.1) ...
+Selecting previously unselected package readline-common.
+Preparing to unpack .../07-readline-common_8.2-4build1_all.deb ...
+Unpacking readline-common (8.2-4build1) ...
+Selecting previously unselected package libreadline8t64:amd64.
+Preparing to unpack .../08-libreadline8t64_8.2-4build1_amd64.deb ...
+Adding 'diversion of /lib/x86_64-linux-gnu/libhistory.so.8 to /lib/x86_64-linux-gnu/libhistory.so.8.usr-is-merged by libreadline8t64'
+Adding 'diversion of /lib/x86_64-linux-gnu/libhistory.so.8.2 to /lib/x86_64-linux-gnu/libhistory.so.8.2.usr-is-merged by libreadline8t64'
+Adding 'diversion of /lib/x86_64-linux-gnu/libreadline.so.8 to /lib/x86_64-linux-gnu/libreadline.so.8.usr-is-merged by libreadline8t64'
+Adding 'diversion of /lib/x86_64-linux-gnu/libreadline.so.8.2 to /lib/x86_64-linux-gnu/libreadline.so.8.2.usr-is-merged by libreadline8t64'
+Unpacking libreadline8t64:amd64 (8.2-4build1) ...
+Selecting previously unselected package libsqlite3-0:amd64.
+Preparing to unpack .../09-libsqlite3-0_3.45.1-1ubuntu2_amd64.deb ...
+Unpacking libsqlite3-0:amd64 (3.45.1-1ubuntu2) ...
+Selecting previously unselected package libpython3.12-stdlib:amd64.
+Preparing to unpack .../10-libpython3.12-stdlib_3.12.3-1ubuntu0.3_amd64.deb ...
+Unpacking libpython3.12-stdlib:amd64 (3.12.3-1ubuntu0.3) ...
+Selecting previously unselected package vim-common.
+Preparing to unpack .../11-vim-common_2%3a9.1.0016-1ubuntu7.5_all.deb ...
+Unpacking vim-common (2:9.1.0016-1ubuntu7.5) ...
+Selecting previously unselected package xxd.
+Preparing to unpack .../12-xxd_2%3a9.1.0016-1ubuntu7.5_amd64.deb ...
+Unpacking xxd (2:9.1.0016-1ubuntu7.5) ...
+Selecting previously unselected package libgpm2:amd64.
+Preparing to unpack .../13-libgpm2_1.20.7-11_amd64.deb ...
+Unpacking libgpm2:amd64 (1.20.7-11) ...
+Selecting previously unselected package libnghttp2-14:amd64.
+Preparing to unpack .../14-libnghttp2-14_1.59.0-1ubuntu0.1_amd64.deb ...
+Unpacking libnghttp2-14:amd64 (1.59.0-1ubuntu0.1) ...
+Selecting previously unselected package libpsl5t64:amd64.
+Preparing to unpack .../15-libpsl5t64_0.21.2-1.1build1_amd64.deb ...
+Unpacking libpsl5t64:amd64 (0.21.2-1.1build1) ...
+Selecting previously unselected package publicsuffix.
+Preparing to unpack .../16-publicsuffix_20231001.0357-0.1_all.deb ...
+Unpacking publicsuffix (20231001.0357-0.1) ...
+Selecting previously unselected package wget.
+Preparing to unpack .../17-wget_1.21.4-1ubuntu4.1_amd64.deb ...
+Unpacking wget (1.21.4-1ubuntu4.1) ...
+Selecting previously unselected package libbrotli1:amd64.
+Preparing to unpack .../18-libbrotli1_1.1.0-2build2_amd64.deb ...
+Unpacking libbrotli1:amd64 (1.1.0-2build2) ...
+Selecting previously unselected package libsasl2-modules-db:amd64.
+Preparing to unpack .../19-libsasl2-modules-db_2.1.28+dfsg1-5ubuntu3.1_amd64.deb ...
+Unpacking libsasl2-modules-db:amd64 (2.1.28+dfsg1-5ubuntu3.1) ...
+Selecting previously unselected package libsasl2-2:amd64.
+Preparing to unpack .../20-libsasl2-2_2.1.28+dfsg1-5ubuntu3.1_amd64.deb ...
+Unpacking libsasl2-2:amd64 (2.1.28+dfsg1-5ubuntu3.1) ...
+Selecting previously unselected package libldap2:amd64.
+Preparing to unpack .../21-libldap2_2.6.7+dfsg-1~exp1ubuntu8.1_amd64.deb ...
+Unpacking libldap2:amd64 (2.6.7+dfsg-1~exp1ubuntu8.1) ...
+Selecting previously unselected package librtmp1:amd64.
+Preparing to unpack .../22-librtmp1_2.4+20151223.gitfa8646d.1-2build7_amd64.deb ...
+Unpacking librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2build7) ...
+Selecting previously unselected package libssh-4:amd64.
+Preparing to unpack .../23-libssh-4_0.10.6-2build2_amd64.deb ...
+Unpacking libssh-4:amd64 (0.10.6-2build2) ...
+Selecting previously unselected package libcurl4t64:amd64.
+Preparing to unpack .../24-libcurl4t64_8.5.0-2ubuntu10.6_amd64.deb ...
+Unpacking libcurl4t64:amd64 (8.5.0-2ubuntu10.6) ...
+Selecting previously unselected package curl.
+Preparing to unpack .../25-curl_8.5.0-2ubuntu10.6_amd64.deb ...
+Unpacking curl (8.5.0-2ubuntu10.6) ...
+Selecting previously unselected package libldap-common.
+Preparing to unpack .../26-libldap-common_2.6.7+dfsg-1~exp1ubuntu8.1_all.deb ...
+Unpacking libldap-common (2.6.7+dfsg-1~exp1ubuntu8.1) ...
+Selecting previously unselected package libpython3.12t64:amd64.
+Preparing to unpack .../27-libpython3.12t64_3.12.3-1ubuntu0.3_amd64.deb ...
+Unpacking libpython3.12t64:amd64 (3.12.3-1ubuntu0.3) ...
+Selecting previously unselected package libsasl2-modules:amd64.
+Preparing to unpack .../28-libsasl2-modules_2.1.28+dfsg1-5ubuntu3.1_amd64.deb ...
+Unpacking libsasl2-modules:amd64 (2.1.28+dfsg1-5ubuntu3.1) ...
+Selecting previously unselected package libsodium23:amd64.
+Preparing to unpack .../29-libsodium23_1.0.18-1build3_amd64.deb ...
+Unpacking libsodium23:amd64 (1.0.18-1build3) ...
+Selecting previously unselected package tree.
+Preparing to unpack .../30-tree_2.1.1-2ubuntu3_amd64.deb ...
+Unpacking tree (2.1.1-2ubuntu3) ...
+Selecting previously unselected package vim-runtime.
+Preparing to unpack .../31-vim-runtime_2%3a9.1.0016-1ubuntu7.5_all.deb ...
+Adding 'diversion of /usr/share/vim/vim91/doc/help.txt to /usr/share/vim/vim91/doc/help.txt.vim-tiny by vim-runtime'
+Adding 'diversion of /usr/share/vim/vim91/doc/tags to /usr/share/vim/vim91/doc/tags.vim-tiny by vim-runtime'
+Unpacking vim-runtime (2:9.1.0016-1ubuntu7.5) ...
+Selecting previously unselected package vim.
+Preparing to unpack .../32-vim_2%3a9.1.0016-1ubuntu7.5_amd64.deb ...
+Unpacking vim (2:9.1.0016-1ubuntu7.5) ...
+Setting up libexpat1:amd64 (2.6.1-2ubuntu0.2) ...
+Setting up media-types (10.1.0) ...
+Setting up libsodium23:amd64 (1.0.18-1build3) ...
+Setting up libgpm2:amd64 (1.20.7-11) ...
+Setting up libbrotli1:amd64 (1.1.0-2build2) ...
+Setting up libsqlite3-0:amd64 (3.45.1-1ubuntu2) ...
+Setting up libsasl2-modules:amd64 (2.1.28+dfsg1-5ubuntu3.1) ...
+Setting up libpython3.12-minimal:amd64 (3.12.3-1ubuntu0.3) ...
+Setting up libpsl5t64:amd64 (0.21.2-1.1build1) ...
+Setting up libnghttp2-14:amd64 (1.59.0-1ubuntu0.1) ...
+Setting up libldap-common (2.6.7+dfsg-1~exp1ubuntu8.1) ...
+Setting up xxd (2:9.1.0016-1ubuntu7.5) ...
+Setting up libsasl2-modules-db:amd64 (2.1.28+dfsg1-5ubuntu3.1) ...
+Setting up tzdata (2024a-3ubuntu1.1) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.38.2 /usr/local/share/perl/5.38.2 /usr/lib/x86_64-linux-gnu/perl5/5.38 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.38 /usr/share/perl/5.38 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 8.)
+debconf: falling back to frontend: Teletype
+Configuring tzdata
+------------------
+
+Please select the geographic area in which you live. Subsequent configuration
+questions will narrow this down by presenting a list of cities, representing
+the time zones in which they are located.
+
+  1. Africa   3. Antarctica  5. Asia      7. Australia  9. Indian    11. Etc
+  2. America  4. Arctic      6. Atlantic  8. Europe     10. Pacific
+Geographic area:
+Use of uninitialized value $_[1] in join or string at /usr/share/perl5/Debconf/DbDriver/Stack.pm line 112.
+
+Current default time zone: '/UTC'
+Local time is now:      Fri Dec 27 13:58:19 UTC 2024.
+Universal Time is now:  Fri Dec 27 13:58:19 UTC 2024.
+Run 'dpkg-reconfigure tzdata' if you wish to change it.
+
+Use of uninitialized value $val in substitution (s///) at /usr/share/perl5/Debconf/Format/822.pm line 84, <GEN6> line 4.
+Use of uninitialized value $val in concatenation (.) or string at /usr/share/perl5/Debconf/Format/822.pm line 85, <GEN6> line 4.
+Setting up vim-common (2:9.1.0016-1ubuntu7.5) ...
+Setting up librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2build7) ...
+Setting up tree (2.1.1-2ubuntu3) ...
+Setting up libsasl2-2:amd64 (2.1.28+dfsg1-5ubuntu3.1) ...
+Setting up libssh-4:amd64 (0.10.6-2build2) ...
+Setting up netbase (6.4) ...
+Setting up vim-runtime (2:9.1.0016-1ubuntu7.5) ...
+Setting up openssl (3.0.13-0ubuntu3.4) ...
+Setting up readline-common (8.2-4build1) ...
+Setting up publicsuffix (20231001.0357-0.1) ...
+Setting up libldap2:amd64 (2.6.7+dfsg-1~exp1ubuntu8.1) ...
+Setting up wget (1.21.4-1ubuntu4.1) ...
+Setting up libcurl4t64:amd64 (8.5.0-2ubuntu10.6) ...
+Setting up ca-certificates (20240203) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.38.2 /usr/local/share/perl/5.38.2 /usr/lib/x86_64-linux-gnu/perl5/5.38 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.38 /usr/share/perl/5.38 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 8.)
+debconf: falling back to frontend: Teletype
+Updating certificates in /etc/ssl/certs...
+146 added, 0 removed; done.
+Setting up libreadline8t64:amd64 (8.2-4build1) ...
+Setting up curl (8.5.0-2ubuntu10.6) ...
+Setting up libpython3.12-stdlib:amd64 (3.12.3-1ubuntu0.3) ...
+Setting up libpython3.12t64:amd64 (3.12.3-1ubuntu0.3) ...
+Setting up vim (2:9.1.0016-1ubuntu7.5) ...
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/editor (editor) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/editor.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/da/man1/editor.1.gz because associated file /usr/share/man/da/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/de/man1/editor.1.gz because associated file /usr/share/man/de/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/editor.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/editor.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/editor.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/editor.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/editor.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/tr/man1/editor.1.gz because associated file /usr/share/man/tr/man1/vim.1.gz (of link group editor) doesn't exist
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/ex (ex) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/ex.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/da/man1/ex.1.gz because associated file /usr/share/man/da/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/de/man1/ex.1.gz because associated file /usr/share/man/de/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/ex.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/ex.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/ex.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/ex.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/ex.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/tr/man1/ex.1.gz because associated file /usr/share/man/tr/man1/vim.1.gz (of link group ex) doesn't exist
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/rview (rview) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/rvim (rvim) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vi (vi) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/vi.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/da/man1/vi.1.gz because associated file /usr/share/man/da/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/de/man1/vi.1.gz because associated file /usr/share/man/de/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/vi.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/vi.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/vi.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/vi.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/vi.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/tr/man1/vi.1.gz because associated file /usr/share/man/tr/man1/vim.1.gz (of link group vi) doesn't exist
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/view (view) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/view.1.gz because associated file /usr/share/man/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/da/man1/view.1.gz because associated file /usr/share/man/da/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/de/man1/view.1.gz because associated file /usr/share/man/de/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/fr/man1/view.1.gz because associated file /usr/share/man/fr/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/it/man1/view.1.gz because associated file /usr/share/man/it/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ja/man1/view.1.gz because associated file /usr/share/man/ja/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/pl/man1/view.1.gz because associated file /usr/share/man/pl/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/ru/man1/view.1.gz because associated file /usr/share/man/ru/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/tr/man1/view.1.gz because associated file /usr/share/man/tr/man1/vim.1.gz (of link group view) doesn't exist
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vim (vim) in auto mode
+update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/vimdiff (vimdiff) in auto mode
+Processing triggers for libc-bin (2.39-0ubuntu8.3) ...
+Processing triggers for ca-certificates (20240203) ...
+Updating certificates in /etc/ssl/certs...
+0 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+ ---> Removed intermediate container 5f6a02964b2f
+ ---> eb0e641bba36
+Step 5/11 : COPY /home/nnrg/5d8 /usr/share/nginx/html/index.html
+COPY failed: file not found in build context or excluded by .dockerignore: stat home/nnrg/5d8: file does not exist
+root@Vaishnavi:~/devops# nano Dockerfile
+root@Vaishnavi:~/devops# docker build -t ubuntu .
+failed to fetch metadata: fork/exec /usr/local/lib/docker/cli-plugins/docker-buildx: no such file or directory
+
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  3.584kB
+Step 1/11 : FROM ubuntu
+ ---> b1d9df8ab815
+Step 2/11 : MAINTAINER vaishu
+ ---> Using cache
+ ---> 3c45b25b4ad3
+Step 3/11 : RUN apt-get update -y && apt-get install -y nginx
+ ---> Using cache
+ ---> f7902320b25b
+Step 4/11 : RUN apt-get install -y vim curl tree wget
+ ---> Using cache
+ ---> eb0e641bba36
+Step 5/11 : COPY /home/nnrg/devops /usr/share/nginx/html/index.html
+COPY failed: file not found in build context or excluded by .dockerignore: stat home/nnrg/devops: file does not exist
+root@Vaishnavi:~/devops# nano Dockerfile
+root@Vaishnavi:~/devops# docker build -t ubuntu .
+failed to fetch metadata: fork/exec /usr/local/lib/docker/cli-plugins/docker-buildx: no such file or directory
+
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  3.584kB
+Step 1/11 : FROM ubuntu
+ ---> b1d9df8ab815
+Step 2/11 : MAINTAINER vaishu
+ ---> Using cache
+ ---> 3c45b25b4ad3
+Step 3/11 : RUN apt-get update -y && apt-get install -y nginx
+ ---> Using cache
+ ---> f7902320b25b
+Step 4/11 : RUN apt-get install -y vim curl tree wget
+ ---> Using cache
+ ---> eb0e641bba36
+Step 5/11 : COPY index.html /usr/share/nginx/html/index.html
+ ---> fdc256c3f173
+Step 6/11 : ENV JAVA_HOME=/usr/bin/java
+ ---> Running in 85db5aff1270
+ ---> Removed intermediate container 85db5aff1270
+ ---> 664a13fd546a
+Step 7/11 : USER root
+ ---> Running in de28665e9cf1
+ ---> Removed intermediate container de28665e9cf1
+ ---> 40073328f41c
+Step 8/11 : WORKDIR /usr/share/nginx/html
+ ---> Running in c82f5688a9fd
+ ---> Removed intermediate container c82f5688a9fd
+ ---> 2ec5b7832a51
+Step 9/11 : VOLUME /myvol
+ ---> Running in 15e6ea4dee0f
+ ---> Removed intermediate container 15e6ea4dee0f
+ ---> c8ec4335a0ae
+Step 10/11 : EXPOSE 80
+ ---> Running in 6e7fdb9806f8
+ ---> Removed intermediate container 6e7fdb9806f8
+ ---> 7fc13b105f16
+Step 11/11 : CMD ["service", "nginx", "start"]
+ ---> Running in 73a82b7fb54b
+ ---> Removed intermediate container 73a82b7fb54b
+ ---> dd046dff1f41
+Successfully built dd046dff1f41
+Successfully tagged ubuntu:latest
+root@Vaishnavi:~/devops# docker run -d -p 8090:80 nginx
+b58db01a48b2584edb579bf1750e2f13e30ed78c415c9f1f76423dfc47ba678f
+root@Vaishnavi:~/devops# docker run -d -p 8092:80 ubuntu
+0d0e09e6fa26368913994e767e517327ea9b538b5f8dee95851cb0cd6cb0e28f
+root@Vaishnavi:~/devops# docker build -t my-nginx-image .
+failed to fetch metadata: fork/exec /usr/local/lib/docker/cli-plugins/docker-buildx: no such file or directory
+
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  3.584kB
+Step 1/11 : FROM ubuntu
+ ---> dd046dff1f41
+Step 2/11 : MAINTAINER vaishu
+ ---> Running in 1411e677a20b
+ ---> Removed intermediate container 1411e677a20b
+ ---> 19b33f9a48a3
+Step 3/11 : RUN apt-get update -y && apt-get install -y nginx
+ ---> Running in 9dfcc1a774a4
+Hit:1 http://security.ubuntu.com/ubuntu noble-security InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu noble InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+Reading package lists...
+Reading package lists...
+Building dependency tree...docker run -d -p 8080:80 my-nginx-image
+Reading state information...
+nginx is already the newest version (1.24.0-2ubuntu7.1).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+ ---> Removed intermediate container 9dfcc1a774a4
+ ---> d9418473c1b7
+Step 4/11 : RUN apt-get install -y vim curl tree wget
+ ---> Running in 8a976a4634e4
+Reading package lists...
+Building dependency tree...
+Reading state information...
+vim is already the newest version (2:9.1.0016-1ubuntu7.5).
+curl is already the newest version (8.5.0-2ubuntu10.6).
+tree is already the newest version (2.1.1-2ubuntu3).
+wget is already the newest version (1.21.4-1ubuntu4.1).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+ ---> Removed intermediate container 8a976a4634e4
+ ---> edf44b6cff11
+Step 5/11 : COPY index.html /usr/share/nginx/html/index.html
+ ---> 7078c3648d2a
+Step 6/11 : ENV JAVA_HOME=/usr/bin/java
+ ---> Running in bbed18d11709
+ ---> Removed intermediate container bbed18d11709
+ ---> ad5eb52155f7
+Step 7/11 : USER root
+ ---> Running in 56d266496899
+ ---> Removed intermediate container 56d266496899
+ ---> 8db833b489bd
+Step 8/11 : WORKDIR /usr/share/nginx/html
+ ---> Running in a11c203f24ed
+ ---> Removed intermediate container a11c203f24ed
+ ---> 3a3bb4bf9e33
+Step 9/11 : VOLUME /myvol
+ ---> Running in 94b39c8d1877
+ ---> Removed intermediate container 94b39c8d1877
+ ---> a8969125efc7
+Step 10/11 : EXPOSE 80
+ ---> Running in ee8497691f8d
+ ---> Removed intermediate container ee8497691f8d
+ ---> 9b4b94f7cba1
+Step 11/11 : CMD ["service", "nginx", "start"]
+ ---> Running in f500f2e9d823
+ ---> Removed intermediate container f500f2e9d823
+ ---> 3468add1f021
+Successfully built 3468add1f021
+Successfully tagged my-nginx-image:latest
+root@Vaishnavi:~/devops# docker run -d -p 8000:80 my-nginx-image
+cd9ddcc5883092050d981de7526e6fa7f15d00557b74eb18944f3e2b75e9c037
+root@Vaishnavi:~/devops# sudo nano /etc/default/jenkins
+root@Vaishnavi:~/devops# sudo nano /lib/systemd/system/jenkins.service
+root@Vaishnavi:~/devops# sudo systemctl daemon-reload
+root@Vaishnavi:~/devops# sudo systemctl restart jenkins
+root@Vaishnavi:~/devops#
